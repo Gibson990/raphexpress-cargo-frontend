@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, MapPin, Plane, Ship, Truck, CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Package, MapPin, Plane, Ship, Truck, CheckCircle2, ArrowRight, ArrowLeft, RotateCcw, RefreshCw } from 'lucide-react';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
@@ -8,14 +8,16 @@ import Input from '../components/common/Input';
 import { ROUTES } from '../utils/constants';
 import toast from 'react-hot-toast';
 
+type OrderType = 'international' | 'local' | 'return' | 'refund' | null;
+
 const CreateShipment = () => {
   const navigate = useNavigate();
+  const [orderType, setOrderType] = useState<OrderType>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
-    // Step 1: Type
-    shipmentType: 'international' as 'local' | 'international',
+    // Shipping mode (for international/local)
     shippingMode: 'air' as 'air' | 'sea' | 'land',
     
     // Step 2: Origin
@@ -88,12 +90,85 @@ const CreateShipment = () => {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-neutral-900 mb-2">
-            Create New Shipment
+            {orderType ? `Create ${orderType.charAt(0).toUpperCase() + orderType.slice(1)} Order` : 'Create New Order'}
           </h1>
           <p className="text-neutral-600">
-            Fill in the details to create your shipment
+            {orderType ? 'Fill in the details to create your order' : 'Select the type of order you want to create'}
           </p>
         </div>
+
+        {/* Order Type Selection - Show first if not selected */}
+        {!orderType ? (
+          <Card variant="elevated" padding="lg">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Select Order Type</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* International Order */}
+              <button
+                onClick={() => {
+                  setOrderType('international');
+                  setCurrentStep(1);
+                }}
+                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+              >
+                <div className="w-16 h-16 bg-blue-100 group-hover:bg-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Ship className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">International</h3>
+                <p className="text-sm text-neutral-600 mb-3">Cross-border shipping via air or sea</p>
+                <div className="text-xs text-neutral-500">5 steps • Customs • Tax</div>
+              </button>
+
+              {/* Local Order */}
+              <button
+                onClick={() => {
+                  setOrderType('local');
+                  setCurrentStep(1);
+                }}
+                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+              >
+                <div className="w-16 h-16 bg-green-100 group-hover:bg-green-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Truck className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Local Delivery</h3>
+                <p className="text-sm text-neutral-600 mb-3">Domestic shipping within country</p>
+                <div className="text-xs text-neutral-500">5 steps • Fast delivery</div>
+              </button>
+
+              {/* Return Order */}
+              <button
+                onClick={() => {
+                  setOrderType('return');
+                  setCurrentStep(1);
+                }}
+                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+              >
+                <div className="w-16 h-16 bg-orange-100 group-hover:bg-orange-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <RotateCcw className="h-8 w-8 text-orange-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Return Order</h3>
+                <p className="text-sm text-neutral-600 mb-3">Return an existing shipment</p>
+                <div className="text-xs text-neutral-500">2 steps • Select order first</div>
+              </button>
+
+              {/* Refund Order */}
+              <button
+                onClick={() => {
+                  setOrderType('refund');
+                  setCurrentStep(1);
+                }}
+                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+              >
+                <div className="w-16 h-16 bg-red-100 group-hover:bg-red-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <RefreshCw className="h-8 w-8 text-red-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Refund Request</h3>
+                <p className="text-sm text-neutral-600 mb-3">Request refund for an order</p>
+                <div className="text-xs text-neutral-500">2 steps • Select order first</div>
+              </button>
+            </div>
+          </Card>
+        ) : (
+          <>
 
         {/* Progress Steps */}
         <Card variant="elevated" padding="lg">
@@ -615,8 +690,24 @@ const CreateShipment = () => {
             </div>
           )}
 
+          {/* Change Order Type Button */}
+          <div className="mt-6 pt-4 border-t border-neutral-200">
+            <button
+              onClick={() => {
+                if (window.confirm('Are you sure you want to change the order type? All progress will be lost.')) {
+                  setOrderType(null);
+                  setCurrentStep(1);
+                }}
+              }}
+              className="text-sm text-neutral-600 hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Change Order Type
+            </button>
+          </div>
+
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-neutral-200">
+          <div className="flex items-center justify-between mt-6">
             <Button
               variant="outline"
               onClick={handleBack}
@@ -641,11 +732,13 @@ const CreateShipment = () => {
                 isLoading={isSubmitting}
                 leftIcon={<CheckCircle2 className="h-4 w-4" />}
               >
-                Create Shipment
+                Create {orderType?.charAt(0).toUpperCase() + orderType?.slice(1)} Order
               </Button>
             )}
           </div>
         </Card>
+          </>
+        )}
       </div>
     </DashboardLayout>
   );
