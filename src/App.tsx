@@ -22,6 +22,9 @@ import TermsOfService from './pages/TermsOfService';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import AirFreight from './pages/services/AirFreight';
+import SeaFreight from './pages/services/SeaFreight';
+import ExpressDelivery from './pages/services/ExpressDelivery';
 import { ROUTES } from './utils/constants';
 
 // Layout wrapper to conditionally show Navbar/Footer
@@ -71,6 +74,9 @@ function App() {
           <Route path={ROUTES.TERMS} element={<TermsOfService />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
           <Route path={ROUTES.CONTACT} element={<Contact />} />
+          <Route path={ROUTES.SERVICE_AIR} element={<AirFreight />} />
+          <Route path={ROUTES.SERVICE_SEA} element={<SeaFreight />} />
+          <Route path={ROUTES.SERVICE_EXPRESS} element={<ExpressDelivery />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
