@@ -1,15 +1,38 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Clock, User, ArrowRight, Search, Tag } from 'lucide-react';
+import { Calendar, Clock, User, ArrowRight, Search, Tag, X } from 'lucide-react';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import { ROUTES, IMAGES } from '../utils/constants';
 
 const Blog = () => {
   const navigate = useNavigate();
+  const [selectedArticle, setSelectedArticle] = useState<any>(null);
 
   const featuredPost = {
     title: 'The Future of Global Logistics: Trends to Watch in 2025',
     excerpt: 'Discover how AI, automation, and sustainability are reshaping the logistics industry and what it means for your business.',
+    content: `The logistics industry is undergoing a massive transformation driven by technological advancements and changing customer expectations. As we move into 2025, several key trends are emerging that will reshape how businesses ship and track their goods globally.
+
+**Artificial Intelligence and Machine Learning**
+
+AI-powered route optimization is becoming the norm, reducing delivery times by up to 30% while cutting fuel costs significantly. Machine learning algorithms can now predict delivery delays before they happen, allowing companies to proactively notify customers and adjust routes in real-time.
+
+**Automation in Warehouses**
+
+Automated warehouses with robotic systems are no longer just for large enterprises. Mid-sized businesses are adopting warehouse automation to improve accuracy and speed. These systems can process orders 24/7 with minimal human intervention, dramatically reducing operational costs.
+
+**Sustainability Initiatives**
+
+Environmental concerns are pushing the industry toward greener solutions. Electric delivery vehicles, carbon-neutral shipping options, and sustainable packaging are becoming standard offerings. Companies that fail to address sustainability will lose customers to eco-conscious competitors.
+
+**Blockchain for Transparency**
+
+Blockchain technology is revolutionizing supply chain transparency. Every step of a shipment's journey can be tracked and verified on an immutable ledger, reducing fraud and improving accountability across the entire logistics chain.
+
+**Conclusion**
+
+The future of logistics is digital, sustainable, and customer-centric. Businesses that embrace these trends early will gain a competitive advantage in the increasingly complex global marketplace.`,
     author: 'Michael Chen',
     date: 'November 1, 2025',
     readTime: '8 min read',
@@ -136,8 +159,7 @@ const Blog = () => {
           <Card
             variant="elevated"
             padding="none"
-            className="overflow-hidden hover:shadow-xl transition-shadow cursor-pointer bg-white"
-            onClick={() => navigate(ROUTES.CONTACT)}
+            className="overflow-hidden hover:shadow-xl transition-shadow bg-white"
           >
             <div className="grid md:grid-cols-2 gap-0">
               <div className="relative h-64 md:h-auto">
@@ -173,8 +195,13 @@ const Blog = () => {
                     <span>{featuredPost.readTime}</span>
                   </div>
                 </div>
-                <Button variant="primary" size="md" rightIcon={<ArrowRight className="h-4 w-4" />}>
-                  Read More
+                <Button 
+                  variant="primary" 
+                  size="md" 
+                  rightIcon={<ArrowRight className="h-4 w-4" />}
+                  onClick={() => setSelectedArticle(featuredPost)}
+                >
+                  Read Full Article
                 </Button>
               </div>
             </div>
@@ -232,8 +259,11 @@ const Blog = () => {
                       <Clock className="h-4 w-4" />
                       {post.readTime}
                     </span>
-                    <button className="text-primary hover:text-primary-600 font-medium text-sm flex items-center gap-1 transition-colors">
-                      Read More
+                    <button 
+                      onClick={() => setSelectedArticle(post)}
+                      className="text-primary hover:text-primary-600 font-medium text-sm flex items-center gap-1 transition-colors"
+                    >
+                      Read Article
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
@@ -305,6 +335,88 @@ const Blog = () => {
           </div>
         </div>
       </section>
+
+      {/* Article Reader Modal */}
+      {selectedArticle && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slide-up">
+            {/* Modal Header */}
+            <div className="relative">
+              <img
+                src={selectedArticle.image}
+                alt={selectedArticle.title}
+                className="w-full h-64 object-cover"
+              />
+              <button
+                onClick={() => setSelectedArticle(null)}
+                className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors"
+              >
+                <X className="h-6 w-6 text-neutral-900" />
+              </button>
+              <div className="absolute bottom-4 left-4">
+                <span className="px-3 py-1 bg-primary text-white text-xs font-medium rounded-full">
+                  {selectedArticle.category}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8 overflow-y-auto max-h-[calc(90vh-16rem)]">
+              <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+                {selectedArticle.title}
+              </h1>
+              
+              <div className="flex items-center gap-4 text-sm text-neutral-600 mb-8 pb-6 border-b border-neutral-200">
+                <div className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span>{selectedArticle.author}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{selectedArticle.date}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{selectedArticle.readTime}</span>
+                </div>
+              </div>
+
+              <div className="prose prose-lg max-w-none">
+                {selectedArticle.content ? (
+                  selectedArticle.content.split('\n\n').map((paragraph: string, index: number) => {
+                    if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
+                      return (
+                        <h2 key={index} className="text-2xl font-bold text-neutral-900 mt-8 mb-4">
+                          {paragraph.replace(/\*\*/g, '')}
+                        </h2>
+                      );
+                    }
+                    return (
+                      <p key={index} className="text-neutral-700 leading-relaxed mb-4">
+                        {paragraph}
+                      </p>
+                    );
+                  })
+                ) : (
+                  <p className="text-neutral-700 leading-relaxed">
+                    {selectedArticle.excerpt}
+                  </p>
+                )}
+              </div>
+
+              {/* Share/Actions */}
+              <div className="mt-8 pt-6 border-t border-neutral-200 flex gap-3">
+                <Button variant="primary" onClick={() => setSelectedArticle(null)}>
+                  Close Article
+                </Button>
+                <Button variant="outline">
+                  Share
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

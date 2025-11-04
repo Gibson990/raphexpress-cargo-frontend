@@ -31,59 +31,57 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 items-center">
-        {/* Left Side - Branding */}
-        <div className="hidden md:block">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-orange/20 rounded-3xl blur-3xl" />
-            <div className="relative bg-white rounded-3xl p-12 shadow-hard">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="bg-gradient-to-br from-primary to-orange-dark p-3 rounded-xl">
-                  <Package className="h-8 w-8 text-white" />
+      <Card variant="elevated" padding="none" className="w-full max-w-6xl animate-slide-up overflow-hidden">
+        <div className="grid md:grid-cols-2">
+          {/* Left Side - Branding (Desktop) */}
+          <div className="hidden md:flex flex-col justify-center bg-gradient-to-br from-primary to-orange-dark p-12 text-white">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
+                <Package className="h-8 w-8 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold">
+                Raphexpress
+              </h1>
+            </div>
+
+            <h2 className="text-4xl font-bold mb-4">
+              Welcome Back!
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Ship globally, track everywhere. Your logistics partner for the last mile of the earth.
+            </p>
+
+            <div className="space-y-4">
+              {[
+                'Track shipments in real-time',
+                'Access to 200+ countries',
+                'Smart customs handling',
+                'Flexible shipping options',
+              ].map((feature, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
+                    <ArrowRight className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-white/90">{feature}</span>
                 </div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-orange-dark bg-clip-text text-transparent">
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side - Login Form */}
+          <div className="p-8 md:p-12">
+            {/* Mobile Branding */}
+            <div className="md:hidden mb-8 text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="bg-gradient-to-br from-primary to-orange-dark p-3 rounded-xl">
+                  <Package className="h-6 w-6 text-white" />
+                </div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-orange-dark bg-clip-text text-transparent">
                   Raphexpress
                 </h1>
               </div>
-
-              <h2 className="text-3xl font-bold text-neutral-900 mb-4">
-                Welcome Back!
-              </h2>
-              <p className="text-lg text-neutral-600 mb-8">
-                Ship globally, track everywhere. Your logistics partner for the last mile of the earth.
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  'Track shipments in real-time',
-                  'Access to 200+ countries',
-                  'Smart customs handling',
-                  'Flexible shipping options',
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="bg-primary/10 p-2 rounded-lg">
-                      <ArrowRight className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-neutral-700">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-12">
-                <img
-                  src={IMAGES.LOGISTICS}
-                  alt="Logistics"
-                  className="rounded-2xl shadow-lg"
-                  loading="lazy"
-                />
-              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Right Side - Login Form */}
-        <div>
-          <Card variant="elevated" padding="lg" className="animate-slide-up">
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-neutral-900 mb-2">
                 Sign In
@@ -212,16 +210,9 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-          </Card>
-
-          {/* Mobile Branding */}
-          <div className="md:hidden mt-6 text-center">
-            <p className="text-sm text-neutral-600">
-              © 2025 Raphexpress Cargo. All rights reserved.
-            </p>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
