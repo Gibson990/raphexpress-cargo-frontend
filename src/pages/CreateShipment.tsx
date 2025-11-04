@@ -31,11 +31,11 @@ const CreateShipment = () => {
     { number: 5, title: 'Review & Submit', icon: CheckCircle2 },
   ];
 
-  // Initialize form hook only when orderType is selected
-  const formHook = orderType ? useOrderForm(orderType) : null;
+  // Initialize form hook - must always be called (Rules of Hooks)
+  const formHook = useOrderForm(orderType || 'international');
 
   const handleNext = () => {
-    if (!formHook) return;
+    if (!orderType) return;
 
     setShowErrors(true);
     const isValid = formHook.validateStep(currentStep);
@@ -54,12 +54,12 @@ const CreateShipment = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
       setShowErrors(false);
-      formHook?.setErrors({});
+      formHook.setErrors({});
     }
   };
 
   const handleSubmit = () => {
-    if (!formHook) return;
+    if (!orderType) return;
 
     setIsSubmitting(true);
     const orderData = formHook.getOrderData();
@@ -87,7 +87,7 @@ const CreateShipment = () => {
 
   // Render step content
   const renderStepContent = () => {
-    if (!formHook || !orderType) return null;
+    if (!orderType) return null;
 
     switch (currentStep) {
       case 1:
