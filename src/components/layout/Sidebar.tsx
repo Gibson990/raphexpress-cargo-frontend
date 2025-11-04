@@ -63,14 +63,35 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white border-r border-neutral-200 transition-all duration-300 z-40 ${
+      className={`fixed left-0 top-0 h-screen bg-white border-r border-neutral-200 transition-all duration-300 z-40 ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
+      {/* Logo Section */}
+      <Link 
+        to={ROUTES.HOME} 
+        className="h-16 border-b border-neutral-200 flex items-center justify-center px-4 hover:bg-neutral-50 transition-colors group"
+      >
+        {isCollapsed ? (
+          <div className="bg-gradient-to-br from-primary to-orange-dark p-2 rounded-lg group-hover:scale-110 transition-transform">
+            <Package className="h-6 w-6 text-white" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <div className="bg-gradient-to-br from-primary to-orange-dark p-2 rounded-lg group-hover:scale-110 transition-transform">
+              <Package className="h-6 w-6 text-white" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-orange-dark bg-clip-text text-transparent">
+              Raphexpress
+            </span>
+          </div>
+        )}
+      </Link>
+
       {/* Toggle Button */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute -right-3 top-6 w-6 h-6 bg-white border border-neutral-200 rounded-full flex items-center justify-center hover:bg-neutral-50 transition-colors"
+        className="absolute -right-3 top-20 w-6 h-6 bg-white border border-neutral-200 rounded-full flex items-center justify-center hover:bg-neutral-50 transition-colors"
       >
         {isCollapsed ? (
           <ChevronRight className="h-4 w-4 text-neutral-600" />
@@ -79,7 +100,7 @@ const Sidebar = () => {
         )}
       </button>
 
-      <div className="flex flex-col h-full py-6">
+      <div className="flex flex-col h-[calc(100%-4rem)] py-6">
         {/* Menu Items */}
         <nav className="flex-1 px-3 space-y-1">
           {menuItems.map((item) => {
