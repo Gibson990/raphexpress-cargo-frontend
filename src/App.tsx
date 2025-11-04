@@ -27,6 +27,8 @@ import SeaFreight from './pages/services/SeaFreight';
 import ExpressDelivery from './pages/services/ExpressDelivery';
 import CookiePolicy from './pages/CookiePolicy';
 import Compliance from './pages/Compliance';
+import Careers from './pages/Careers';
+import Blog from './pages/Blog';
 import { ROUTES } from './utils/constants';
 
 // Layout wrapper to conditionally show Navbar/Footer
@@ -81,6 +83,8 @@ function App() {
           <Route path={ROUTES.SERVICE_EXPRESS} element={<ExpressDelivery />} />
           <Route path={ROUTES.COOKIES} element={<CookiePolicy />} />
           <Route path={ROUTES.COMPLIANCE} element={<Compliance />} />
+          <Route path={ROUTES.CAREERS} element={<Careers />} />
+          <Route path={ROUTES.BLOG} element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
