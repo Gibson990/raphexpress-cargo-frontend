@@ -14,6 +14,8 @@ import ApiDocs from './pages/ApiDocs';
 import ShippingCalculator from './pages/ShippingCalculator';
 import CreateShipment from './pages/CreateShipment';
 import MyShipments from './pages/MyShipments';
+import ReturnOrder from './pages/ReturnOrder';
+import RefundRequest from './pages/RefundRequest';
 import Payment from './pages/Payment';
 import Billing from './pages/Billing';
 import Profile from './pages/Profile';
@@ -75,6 +77,8 @@ function App() {
           <Route path={ROUTES.CALCULATOR} element={<ShippingCalculator />} />
           <Route path={ROUTES.CREATE_SHIPMENT} element={<CreateShipment />} />
           <Route path={ROUTES.MY_SHIPMENTS} element={<MyShipments />} />
+          <Route path={ROUTES.RETURN_ORDER} element={<ReturnOrder />} />
+          <Route path={ROUTES.REFUND_REQUEST} element={<RefundRequest />} />
           <Route path={ROUTES.PAYMENT} element={<Payment />} />
           <Route path={ROUTES.BILLING} element={<Billing />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />

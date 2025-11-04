@@ -11,6 +11,8 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  RotateCcw,
+  DollarSign,
 } from 'lucide-react';
 import { useState } from 'react';
 import { ROUTES } from '../../utils/constants';
@@ -36,6 +38,16 @@ const Sidebar = () => {
       title: 'My Shipments',
       icon: Package,
       path: ROUTES.MY_SHIPMENTS,
+    },
+    {
+      title: 'Return Order',
+      icon: RotateCcw,
+      path: ROUTES.RETURN_ORDER,
+    },
+    {
+      title: 'Refund Request',
+      icon: DollarSign,
+      path: ROUTES.REFUND_REQUEST,
     },
     {
       title: 'Track Shipment',
