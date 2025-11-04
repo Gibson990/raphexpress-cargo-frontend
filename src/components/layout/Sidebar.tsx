@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Package,
@@ -17,6 +17,7 @@ import { ROUTES } from '../../utils/constants';
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
@@ -130,12 +131,12 @@ const Sidebar = () => {
           <button
             onClick={() => {
               // Handle logout
-              window.location.href = ROUTES.HOME;
+              navigate(ROUTES.HOME);
             }}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors group"
             title={isCollapsed ? 'Logout' : ''}
           >
-            <LogOut className="h-5 w-5 flex-shrink-0 group-hover:-translate-x-1 transition-transform" />
+            <LogOut className="h-5 w-5 flex-shrink-0" />
             {!isCollapsed && <span className="font-medium">Logout</span>}
           </button>
         </div>

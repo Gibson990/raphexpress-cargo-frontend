@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Package, User, LogIn } from 'lucide-react';
 import Button from '../common/Button';
 import { ROUTES } from '../../utils/constants';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isAuthenticated = false; // TODO: Replace with actual auth state
 
@@ -50,7 +51,7 @@ const Navbar = () => {
                   variant="ghost"
                   size="sm"
                   leftIcon={<User className="h-4 w-4" />}
-                  onClick={() => window.location.href = ROUTES.DASHBOARD}
+                  onClick={() => navigate(ROUTES.DASHBOARD)}
                 >
                   Dashboard
                 </Button>
@@ -60,7 +61,7 @@ const Navbar = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => window.location.href = ROUTES.LOGIN}
+                  onClick={() => navigate(ROUTES.LOGIN)}
                 >
                   Login
                 </Button>
@@ -68,7 +69,7 @@ const Navbar = () => {
                   variant="primary"
                   size="sm"
                   leftIcon={<LogIn className="h-4 w-4" />}
-                  onClick={() => window.location.href = ROUTES.SIGNUP}
+                  onClick={() => navigate(ROUTES.SIGNUP)}
                 >
                   Get Started
                 </Button>
@@ -112,7 +113,7 @@ const Navbar = () => {
                   className="w-full"
                   leftIcon={<User className="h-4 w-4" />}
                   onClick={() => {
-                    window.location.href = ROUTES.DASHBOARD;
+                    navigate(ROUTES.DASHBOARD);
                     setIsMenuOpen(false);
                   }}
                 >
@@ -124,7 +125,7 @@ const Navbar = () => {
                     variant="outline"
                     className="w-full"
                     onClick={() => {
-                      window.location.href = ROUTES.LOGIN;
+                      navigate(ROUTES.LOGIN);
                       setIsMenuOpen(false);
                     }}
                   >
@@ -134,7 +135,7 @@ const Navbar = () => {
                     variant="primary"
                     className="w-full"
                     onClick={() => {
-                      window.location.href = ROUTES.SIGNUP;
+                      navigate(ROUTES.SIGNUP);
                       setIsMenuOpen(false);
                     }}
                   >
