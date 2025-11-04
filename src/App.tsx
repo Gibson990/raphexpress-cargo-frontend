@@ -25,6 +25,8 @@ import NotFound from './pages/NotFound';
 import AirFreight from './pages/services/AirFreight';
 import SeaFreight from './pages/services/SeaFreight';
 import ExpressDelivery from './pages/services/ExpressDelivery';
+import CookiePolicy from './pages/CookiePolicy';
+import Compliance from './pages/Compliance';
 import { ROUTES } from './utils/constants';
 
 // Layout wrapper to conditionally show Navbar/Footer
@@ -77,6 +79,8 @@ function App() {
           <Route path={ROUTES.SERVICE_AIR} element={<AirFreight />} />
           <Route path={ROUTES.SERVICE_SEA} element={<SeaFreight />} />
           <Route path={ROUTES.SERVICE_EXPRESS} element={<ExpressDelivery />} />
+          <Route path={ROUTES.COOKIES} element={<CookiePolicy />} />
+          <Route path={ROUTES.COMPLIANCE} element={<Compliance />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
