@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, MapPin, Plane, Ship, Truck, CheckCircle2, ArrowRight, ArrowLeft, RotateCcw, RefreshCw } from 'lucide-react';
+import { Package, MapPin, Plane, Ship, Truck, CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
@@ -8,7 +8,7 @@ import Input from '../components/common/Input';
 import { ROUTES } from '../utils/constants';
 import toast from 'react-hot-toast';
 
-type OrderType = 'international' | 'local' | 'return' | 'refund' | null;
+type OrderType = 'international' | 'local' | null;
 
 const CreateShipment = () => {
   const navigate = useNavigate();
@@ -90,32 +90,39 @@ const CreateShipment = () => {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-neutral-900 mb-2">
-            {orderType ? `Create ${orderType.charAt(0).toUpperCase() + orderType.slice(1)} Order` : 'Create New Order'}
+            {orderType ? `Create ${orderType.charAt(0).toUpperCase() + orderType.slice(1)} Shipment` : 'Create New Shipment'}
           </h1>
           <p className="text-neutral-600">
-            {orderType ? 'Fill in the details to create your order' : 'Select the type of order you want to create'}
+            {orderType ? 'Fill in the details to create your shipment' : 'Select international or local delivery'}
           </p>
         </div>
 
         {/* Order Type Selection - Show first if not selected */}
         {!orderType ? (
           <Card variant="elevated" padding="lg">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Select Order Type</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Select Shipment Type</h2>
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {/* International Order */}
               <button
                 onClick={() => {
                   setOrderType('international');
                   setCurrentStep(1);
                 }}
-                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                className="p-8 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
               >
-                <div className="w-16 h-16 bg-blue-100 group-hover:bg-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <Ship className="h-8 w-8 text-blue-600" />
+                <div className="w-20 h-20 bg-blue-100 group-hover:bg-blue-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Ship className="h-10 w-10 text-blue-600" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">International</h3>
-                <p className="text-sm text-neutral-600 mb-3">Cross-border shipping via air or sea</p>
-                <div className="text-xs text-neutral-500">5 steps • Customs • Tax</div>
+                <h3 className="font-bold text-xl mb-2">International Shipping</h3>
+                <p className="text-sm text-neutral-600 mb-3">Cross-border shipping via air or sea freight</p>
+                <div className="flex items-center justify-center gap-2 text-xs text-neutral-500">
+                  <span>•</span>
+                  <span>5 Steps</span>
+                  <span>•</span>
+                  <span>Customs</span>
+                  <span>•</span>
+                  <span>Tax Calculation</span>
+                </div>
               </button>
 
               {/* Local Order */}
@@ -124,46 +131,21 @@ const CreateShipment = () => {
                   setOrderType('local');
                   setCurrentStep(1);
                 }}
-                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
+                className="p-8 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
               >
-                <div className="w-16 h-16 bg-green-100 group-hover:bg-green-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <Truck className="h-8 w-8 text-green-600" />
+                <div className="w-20 h-20 bg-green-100 group-hover:bg-green-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
+                  <Truck className="h-10 w-10 text-green-600" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Local Delivery</h3>
-                <p className="text-sm text-neutral-600 mb-3">Domestic shipping within country</p>
-                <div className="text-xs text-neutral-500">5 steps • Fast delivery</div>
-              </button>
-
-              {/* Return Order */}
-              <button
-                onClick={() => {
-                  setOrderType('return');
-                  setCurrentStep(1);
-                }}
-                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
-              >
-                <div className="w-16 h-16 bg-orange-100 group-hover:bg-orange-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <RotateCcw className="h-8 w-8 text-orange-600" />
+                <h3 className="font-bold text-xl mb-2">Local Delivery</h3>
+                <p className="text-sm text-neutral-600 mb-3">Fast domestic shipping within your country</p>
+                <div className="flex items-center justify-center gap-2 text-xs text-neutral-500">
+                  <span>•</span>
+                  <span>5 Steps</span>
+                  <span>•</span>
+                  <span>Same/Next Day</span>
+                  <span>•</span>
+                  <span>No Customs</span>
                 </div>
-                <h3 className="font-bold text-lg mb-2">Return Order</h3>
-                <p className="text-sm text-neutral-600 mb-3">Return an existing shipment</p>
-                <div className="text-xs text-neutral-500">2 steps • Select order first</div>
-              </button>
-
-              {/* Refund Order */}
-              <button
-                onClick={() => {
-                  setOrderType('refund');
-                  setCurrentStep(1);
-                }}
-                className="p-6 rounded-xl border-2 border-neutral-200 hover:border-primary hover:bg-primary/5 transition-all group"
-              >
-                <div className="w-16 h-16 bg-red-100 group-hover:bg-red-200 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <RefreshCw className="h-8 w-8 text-red-600" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">Refund Request</h3>
-                <p className="text-sm text-neutral-600 mb-3">Request refund for an order</p>
-                <div className="text-xs text-neutral-500">2 steps • Select order first</div>
               </button>
             </div>
           </Card>
@@ -732,7 +714,7 @@ const CreateShipment = () => {
                 isLoading={isSubmitting}
                 leftIcon={<CheckCircle2 className="h-4 w-4" />}
               >
-                Create {orderType?.charAt(0).toUpperCase() + orderType?.slice(1)} Order
+                Create {orderType?.charAt(0).toUpperCase() + orderType?.slice(1)} Shipment
               </Button>
             )}
           </div>
