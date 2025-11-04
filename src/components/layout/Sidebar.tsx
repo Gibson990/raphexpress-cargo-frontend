@@ -119,7 +119,7 @@ const Sidebar = () => {
         {/* Bottom Section */}
         <div className="px-3 space-y-1 border-t border-neutral-200 pt-4">
           <Link
-            to="/settings"
+            to={ROUTES.SETTINGS}
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-neutral-700 hover:bg-neutral-100 transition-colors group"
             title={isCollapsed ? 'Settings' : ''}
           >

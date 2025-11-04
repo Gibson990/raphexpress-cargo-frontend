@@ -21,6 +21,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 import { ROUTES } from './utils/constants';
 
 // Layout wrapper to conditionally show Navbar/Footer
@@ -60,16 +61,17 @@ function App() {
           <Route path={ROUTES.AVAILABILITY} element={<Availability />} />
           <Route path={ROUTES.JOIN_US} element={<JoinUs />} />
           <Route path={ROUTES.API_DOCS} element={<ApiDocs />} />
-          <Route path="/calculator" element={<ShippingCalculator />} />
+          <Route path={ROUTES.CALCULATOR} element={<ShippingCalculator />} />
           <Route path={ROUTES.CREATE_SHIPMENT} element={<CreateShipment />} />
           <Route path={ROUTES.MY_SHIPMENTS} element={<MyShipments />} />
           <Route path={ROUTES.BILLING} element={<Billing />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsOfService />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path={ROUTES.SETTINGS} element={<Settings />} />
+          <Route path={ROUTES.PRIVACY} element={<PrivacyPolicy />} />
+          <Route path={ROUTES.TERMS} element={<TermsOfService />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+          <Route path={ROUTES.CONTACT} element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
       <Toaster

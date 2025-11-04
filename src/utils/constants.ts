@@ -80,9 +80,28 @@ export const ROUTES = {
   AVAILABILITY: '/availability',
   BILLING: '/billing',
   PROFILE: '/profile',
+  SETTINGS: '/settings',
   SUPPORT: '/support',
   JOIN_US: '/join-us',
   API_DOCS: '/api',
+  CALCULATOR: '/calculator',
+  
+  // Company
+  ABOUT: '/about',
+  CONTACT: '/contact',
+  CAREERS: '/careers',
+  BLOG: '/blog',
+  
+  // Services
+  SERVICE_AIR: '/services/air',
+  SERVICE_SEA: '/services/sea',
+  SERVICE_EXPRESS: '/services/express',
+  
+  // Legal
+  PRIVACY: '/privacy',
+  TERMS: '/terms',
+  COOKIES: '/cookies',
+  COMPLIANCE: '/compliance',
 } as const;
 
 // Image Placeholders (Using Unsplash for high-quality images)

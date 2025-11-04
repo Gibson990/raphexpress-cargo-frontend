@@ -7,28 +7,28 @@ const Footer = () => {
 
   const footerLinks = {
     company: [
-      { name: 'About Us', path: '/about' },
+      { name: 'About Us', path: ROUTES.ABOUT },
       { name: 'Join Us (Franchise)', path: ROUTES.JOIN_US },
-      { name: 'Careers', path: '/careers' },
-      { name: 'Blog', path: '/blog' },
+      { name: 'Careers', path: ROUTES.CAREERS },
+      { name: 'Blog', path: ROUTES.BLOG },
     ],
     services: [
-      { name: 'Air Freight', path: '/services/air' },
-      { name: 'Sea Freight', path: '/services/sea' },
-      { name: 'Express Delivery', path: '/services/express' },
+      { name: 'Air Freight', path: ROUTES.SERVICE_AIR },
+      { name: 'Sea Freight', path: ROUTES.SERVICE_SEA },
+      { name: 'Express Delivery', path: ROUTES.SERVICE_EXPRESS },
       { name: 'API Integration', path: ROUTES.API_DOCS },
     ],
     support: [
       { name: 'Help Center', path: ROUTES.SUPPORT },
       { name: 'Track Shipment', path: ROUTES.TRACK },
       { name: 'Availability', path: ROUTES.AVAILABILITY },
-      { name: 'Contact Us', path: '/contact' },
+      { name: 'Contact Us', path: ROUTES.CONTACT },
     ],
     legal: [
-      { name: 'Privacy Policy', path: '/privacy' },
-      { name: 'Terms of Service', path: '/terms' },
-      { name: 'Cookie Policy', path: '/cookies' },
-      { name: 'Compliance', path: '/compliance' },
+      { name: 'Privacy Policy', path: ROUTES.PRIVACY },
+      { name: 'Terms of Service', path: ROUTES.TERMS },
+      { name: 'Cookie Policy', path: ROUTES.COOKIES },
+      { name: 'Compliance', path: ROUTES.COMPLIANCE },
     ],
   };
 
