@@ -119,38 +119,40 @@ const StepShippingMethod = ({ data, onChange, errors, showErrors, orderType }: S
         error={showErrors ? errors.goodsValue : undefined}
       />
 
-      {/* Additional Options */}
-      <div className="space-y-3">
-        <label className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
-          <input
-            type="checkbox"
-            checked={data.customsClearance}
-            onChange={(e) => onChange({ ...data, customsClearance: e.target.checked })}
-            className="w-5 h-5 text-primary rounded focus:ring-2 focus:ring-primary"
-          />
-          <div className="flex-1">
-            <span className="font-medium text-neutral-900">Customs Clearance Assistance</span>
-            <p className="text-sm text-neutral-600 mt-1">
-              We'll help with customs documentation and clearance
-            </p>
-          </div>
-        </label>
+      {/* Additional Options - Only for International */}
+      {orderType === 'international' && (
+        <div className="space-y-3">
+          <label className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
+            <input
+              type="checkbox"
+              checked={data.customsClearance}
+              onChange={(e) => onChange({ ...data, customsClearance: e.target.checked })}
+              className="w-5 h-5 text-primary rounded focus:ring-2 focus:ring-primary"
+            />
+            <div className="flex-1">
+              <span className="font-medium text-neutral-900">Customs Clearance Assistance</span>
+              <p className="text-sm text-neutral-600 mt-1">
+                We'll help with customs documentation and clearance
+              </p>
+            </div>
+          </label>
 
-        <label className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
-          <input
-            type="checkbox"
-            checked={data.insurance}
-            onChange={(e) => onChange({ ...data, insurance: e.target.checked })}
-            className="w-5 h-5 text-primary rounded focus:ring-2 focus:ring-primary"
-          />
-          <div className="flex-1">
-            <span className="font-medium text-neutral-900">Cargo Insurance</span>
-            <p className="text-sm text-neutral-600 mt-1">
-              Protect your shipment against damage or loss
-            </p>
-          </div>
-        </label>
-      </div>
+          <label className="flex items-center gap-3 p-4 bg-neutral-50 rounded-lg cursor-pointer hover:bg-neutral-100 transition-colors">
+            <input
+              type="checkbox"
+              checked={data.insurance}
+              onChange={(e) => onChange({ ...data, insurance: e.target.checked })}
+              className="w-5 h-5 text-primary rounded focus:ring-2 focus:ring-primary"
+            />
+            <div className="flex-1">
+              <span className="font-medium text-neutral-900">Cargo Insurance</span>
+              <p className="text-sm text-neutral-600 mt-1">
+                Protect your shipment against damage or loss
+              </p>
+            </div>
+          </label>
+        </div>
+      )}
     </div>
   );
 };

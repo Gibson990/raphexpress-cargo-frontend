@@ -67,9 +67,10 @@ const CreateShipment = () => {
 
     setTimeout(() => {
       setIsSubmitting(false);
-      toast.success(`${orderType?.charAt(0).toUpperCase()}${orderType?.slice(1)} shipment created successfully!`);
-      navigate(ROUTES.MY_SHIPMENTS);
-    }, 2000);
+      toast.success('Proceeding to payment...');
+      // Navigate to payment with order data
+      navigate(ROUTES.PAYMENT, { state: { orderData } });
+    }, 1000);
   };
 
   const handleOrderTypeSelect = (type: 'international' | 'local') => {

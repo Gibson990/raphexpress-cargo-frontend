@@ -77,6 +77,7 @@ export const ROUTES = {
   MY_SHIPMENTS: '/shipments',
   RETURN_ORDER: '/returns/create',
   REFUND_REQUEST: '/refunds/create',
+  PAYMENT: '/payment',
   TRACK: '/track',
   TRACK_ID: '/track/:id',
   AVAILABILITY: '/availability',
