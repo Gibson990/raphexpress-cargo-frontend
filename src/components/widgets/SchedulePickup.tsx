@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calendar, Clock, MapPin, FileText, CheckCircle2, Loader } from 'lucide-react';
+import { Calendar, Clock, MapPin, CheckCircle2, Loader } from 'lucide-react';
 import Button from '../common/Button';
 import Card from '../common/Card';
 import toast from 'react-hot-toast';
