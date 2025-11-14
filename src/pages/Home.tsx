@@ -15,6 +15,7 @@ import {
   Package,
 } from 'lucide-react';
 import Button from '../components/common/Button';
+import QuickQuote from '../components/widgets/QuickQuote';
 import { ROUTES, IMAGES, FEATURES } from '../utils/constants';
 
 const Home = () => {
@@ -181,6 +182,21 @@ const Home = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Quick Quote Section */}
+      <section className="bg-gradient-to-b from-neutral-50 to-white py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+              Get Instant Quote
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Enter your shipment details and get pricing for Express, Standard, and Economy options
+            </p>
+          </div>
+          <QuickQuote />
         </div>
       </section>
 
