@@ -2,6 +2,7 @@ import { Package, TrendingUp, Clock, CheckCircle2, PlusCircle, Search, Download,
 import DashboardLayout from '../components/layout/DashboardLayout';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
+import PrintLabelButton from '../components/common/PrintLabelButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES, SHIPMENT_STATUS_LABELS } from '../utils/constants';
 
@@ -223,13 +224,26 @@ const Dashboard = () => {
                       >
                         Track
                       </Button>
-                      <Button
-                        variant="ghost"
+                      <PrintLabelButton
+                        shipmentId={shipment.id}
+                        trackingNumber={shipment.id}
+                        senderName="John Doe"
+                        senderAddress="123 Main St"
+                        senderCity={shipment.destination.split(',')[0]}
+                        senderCountry={shipment.destination.split(',')[1]?.trim() || 'UAE'}
+                        senderPhone="+1234567890"
+                        receiverName="Jane Smith"
+                        receiverAddress="456 Oak Ave"
+                        receiverCity={shipment.destination.split(',')[0]}
+                        receiverCountry={shipment.destination.split(',')[1]?.trim() || 'UAE'}
+                        receiverPhone="+9876543210"
+                        weight={100}
+                        serviceType={shipment.mode === 'Express' ? 'express' : shipment.mode === 'Air Freight' ? 'standard' : 'economy'}
+                        createdDate={new Date(shipment.eta).toLocaleDateString()}
+                        estimatedDelivery={new Date(shipment.eta).toLocaleDateString()}
                         size="sm"
-                        leftIcon={<Download className="h-4 w-4" />}
-                      >
-                        Label
-                      </Button>
+                        variant="ghost"
+                      />
                     </div>
                   </div>
                 </div>
