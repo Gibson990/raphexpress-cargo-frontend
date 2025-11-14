@@ -249,20 +249,24 @@ const MyShipments = () => {
                           >
                             Label
                           </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => navigate(ROUTES.RETURN_ORDER, { state: { selectedOrder: shipment } })}
-                          >
-                            Return
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => navigate(ROUTES.REFUND_REQUEST, { state: { selectedOrder: shipment } })}
-                          >
-                            Refund
-                          </Button>
+                          {shipment.status === 'delivered' && (
+                            <>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => navigate(ROUTES.RETURN_ORDER, { state: { selectedOrder: shipment } })}
+                              >
+                                Return
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => navigate(ROUTES.REFUND_REQUEST, { state: { selectedOrder: shipment } })}
+                              >
+                                Refund
+                              </Button>
+                            </>
+                          )}
                         </div>
                       </td>
                     </tr>
