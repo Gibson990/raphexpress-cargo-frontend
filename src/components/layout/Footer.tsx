@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Package, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Package, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Apple, Smartphone } from 'lucide-react';
 import { ROUTES } from '../../utils/constants';
 
 const Footer = () => {
@@ -141,6 +141,40 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* App Download Section */}
+        <div className="border-t border-neutral-800 py-8 mb-8">
+          <h3 className="text-white font-semibold mb-6">Download Our App</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xs">
+            {/* App Store */}
+            <a
+              href="https://apps.apple.com/app/raphexpress"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors group"
+            >
+              <Apple className="h-6 w-6 text-white group-hover:text-primary transition-colors" />
+              <div className="text-left">
+                <p className="text-xs text-neutral-400">Download on</p>
+                <p className="text-sm font-semibold text-white">App Store</p>
+              </div>
+            </a>
+
+            {/* Google Play */}
+            <a
+              href="https://play.google.com/store/apps/details?id=com.raphexpress"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors group"
+            >
+              <Smartphone className="h-6 w-6 text-white group-hover:text-primary transition-colors" />
+              <div className="text-left">
+                <p className="text-xs text-neutral-400">Get it on</p>
+                <p className="text-sm font-semibold text-white">Google Play</p>
+              </div>
+            </a>
           </div>
         </div>
 
