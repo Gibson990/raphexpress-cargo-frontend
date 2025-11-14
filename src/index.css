@@ -15,6 +15,12 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Make all native checkboxes/radios use the app primary color instead of default blue */
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: theme('colors.primary.DEFAULT');
+  }
 }
 
 @layer components {

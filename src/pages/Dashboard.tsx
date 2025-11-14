@@ -111,7 +111,7 @@ const Dashboard = () => {
             <Button
               variant="outline"
               leftIcon={<Search className="h-4 w-4" />}
-              onClick={() => navigate(ROUTES.TRACK)}
+              onClick={() => navigate(ROUTES.TRACK, { state: { useDashboard: true } })}
             >
               Track Shipment
             </Button>
@@ -219,7 +219,7 @@ const Dashboard = () => {
                         variant="ghost"
                         size="sm"
                         leftIcon={<Eye className="h-4 w-4" />}
-                        onClick={() => navigate(`${ROUTES.TRACK}/${shipment.id}`)}
+                        onClick={() => navigate(`${ROUTES.TRACK}/${shipment.id}`, { state: { useDashboard: true } })}
                       >
                         Track
                       </Button>

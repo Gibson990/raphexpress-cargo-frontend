@@ -37,6 +37,7 @@ import { ROUTES } from './utils/constants';
 // Layout wrapper to conditionally show Navbar/Footer
 function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const forceDashboard = (location.state as any)?.useDashboard;
   const isDashboardRoute = location.pathname.startsWith('/dashboard') || 
                           location.pathname.startsWith('/shipments') ||
                           location.pathname.startsWith('/returns') ||
@@ -44,7 +45,8 @@ function Layout({ children }: { children: React.ReactNode }) {
                           location.pathname.startsWith('/payment') ||
                           location.pathname.startsWith('/availability') ||
                           location.pathname.startsWith('/billing') ||
-                          location.pathname.startsWith('/profile');
+                          location.pathname.startsWith('/profile') ||
+                          !!forceDashboard;
 
   if (isDashboardRoute) {
     return <>{children}</>;

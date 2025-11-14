@@ -101,7 +101,7 @@ const MyShipments = () => {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
@@ -158,28 +158,28 @@ const MyShipments = () => {
         {/* Shipments Table */}
         <Card variant="elevated" padding="none">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-sm">
               <thead className="bg-neutral-50 border-b border-neutral-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900">
                     Tracking ID
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900">
                     Route
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900 hidden sm:table-cell">
                     Mode
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900 hidden md:table-cell">
                     ETA
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-left font-semibold text-neutral-900 hidden lg:table-cell">
                     Details
                   </th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-neutral-900">
+                  <th className="px-4 md:px-6 py-3 md:py-4 text-right font-semibold text-neutral-900">
                     Actions
                   </th>
                 </tr>
@@ -187,7 +187,7 @@ const MyShipments = () => {
               <tbody className="divide-y divide-neutral-200">
                 {filteredShipments.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="px-6 py-12 text-center">
+                    <td colSpan={7} className="px-4 md:px-6 py-12 text-center">
                       <Package className="h-12 w-12 text-neutral-300 mx-auto mb-4" />
                       <p className="text-neutral-600">No shipments found</p>
                     </td>
@@ -195,50 +195,50 @@ const MyShipments = () => {
                 ) : (
                   filteredShipments.map((shipment) => (
                     <tr key={shipment.id} className="hover:bg-neutral-50 transition-colors">
-                      <td className="px-6 py-4">
+                      <td className="px-4 md:px-6 py-3 md:py-4 align-top">
                         <div className="font-mono font-semibold text-neutral-900">
                           {shipment.id}
                         </div>
-                        <div className="text-sm text-neutral-500 flex items-center gap-1 mt-1">
+                        <div className="text-xs md:text-sm text-neutral-500 flex items-center gap-1 mt-1">
                           <Calendar className="h-3 w-3" />
                           {new Date(shipment.createdDate).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 md:px-6 py-3 md:py-4">
                         <div className="flex items-start gap-2">
                           <MapPin className="h-4 w-4 text-neutral-400 mt-0.5 flex-shrink-0" />
                           <div>
-                            <div className="text-sm text-neutral-900">{shipment.origin}</div>
-                            <div className="text-sm text-neutral-500">→ {shipment.destination}</div>
+                            <div className="text-neutral-900">{shipment.origin}</div>
+                            <div className="text-neutral-500">→ {shipment.destination}</div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 md:px-6 py-3 md:py-4">
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(shipment.status)}`}>
                           {SHIPMENT_STATUS_LABELS[shipment.status as keyof typeof SHIPMENT_STATUS_LABELS]}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-neutral-900">{shipment.mode}</div>
+                      <td className="px-4 md:px-6 py-3 md:py-4 hidden sm:table-cell">
+                        <div className="text-neutral-900">{shipment.mode}</div>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-neutral-900">
+                      <td className="px-4 md:px-6 py-3 md:py-4 hidden md:table-cell">
+                        <div className="text-neutral-900">
                           {new Date(shipment.eta).toLocaleDateString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-neutral-600">
+                      <td className="px-4 md:px-6 py-3 md:py-4 hidden lg:table-cell">
+                        <div className="text-neutral-600">
                           <div>{shipment.weight}</div>
                           <div className="text-neutral-500">{shipment.value}</div>
                         </div>
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-4 md:px-6 py-3 md:py-4">
                         <div className="flex items-center justify-end gap-2">
                           <Button
                             variant="ghost"
                             size="sm"
                             leftIcon={<Eye className="h-4 w-4" />}
-                            onClick={() => navigate(`${ROUTES.TRACK}/${shipment.id}`)}
+                            onClick={() => navigate(`${ROUTES.TRACK}/${shipment.id}`, { state: { useDashboard: true } })}
                           >
                             Track
                           </Button>
@@ -248,6 +248,20 @@ const MyShipments = () => {
                             leftIcon={<Download className="h-4 w-4" />}
                           >
                             Label
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => navigate(ROUTES.RETURN_ORDER, { state: { selectedOrder: shipment } })}
+                          >
+                            Return
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => navigate(ROUTES.REFUND_REQUEST, { state: { selectedOrder: shipment } })}
+                          >
+                            Refund
                           </Button>
                         </div>
                       </td>

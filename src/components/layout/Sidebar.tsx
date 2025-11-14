@@ -14,13 +14,21 @@ import {
   RotateCcw,
   DollarSign,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ROUTES } from '../../utils/constants';
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    const width = isCollapsed ? '5rem' : '16rem';
+    document.documentElement.style.setProperty('--sidebar-width', width);
+    return () => {
+      // optional cleanup not necessary here
+    };
+  }, [isCollapsed]);
 
   const menuItems = [
     {
@@ -78,6 +86,7 @@ const Sidebar = () => {
       className={`fixed left-0 top-0 h-screen bg-white border-r border-neutral-200 transition-all duration-300 z-40 ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
+      style={{ ['--sidebar-width' as any]: isCollapsed ? '5rem' : '16rem' }}
     >
       {/* Logo Section */}
       <Link 
@@ -123,6 +132,7 @@ const Sidebar = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                state={item.path === ROUTES.TRACK ? { useDashboard: true } : undefined}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group ${
                   active
                     ? 'bg-primary text-white'

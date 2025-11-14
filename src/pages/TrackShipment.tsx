@@ -4,7 +4,9 @@ import { Search, Package, MapPin, Clock, CheckCircle2, Truck, Plane, Ship, Alert
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import Card from '../components/common/Card';
-import { SHIPMENT_STATUS, SHIPMENT_STATUS_LABELS, IMAGES } from '../utils/constants';
+import DashboardLayout from '../components/layout/DashboardLayout';
+import { useLocation } from 'react-router-dom';
+import { SHIPMENT_STATUS_LABELS, IMAGES } from '../utils/constants';
 
 const TrackShipment = () => {
   const { id } = useParams();
@@ -82,9 +84,11 @@ const TrackShipment = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 py-12 px-4">
-      <div className="max-w-5xl mx-auto">
+  const location = useLocation();
+  const useDash = (location.state as any)?.useDashboard;
+
+  const content = (
+    <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-orange-dark rounded-2xl mb-4">
@@ -318,7 +322,16 @@ const TrackShipment = () => {
             </div>
           </Card>
         )}
-      </div>
+    </div>
+  );
+
+  if (useDash) {
+    return <DashboardLayout>{content}</DashboardLayout>;
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 py-12 px-4">
+      {content}
     </div>
   );
 };

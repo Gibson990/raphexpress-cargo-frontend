@@ -9,10 +9,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div className="flex min-h-screen bg-neutral-50">
       <Sidebar />
-      <main className="flex-1 ml-64 p-8 transition-all duration-300">
-        <div className="max-w-7xl mx-auto">
-          {children}
-        </div>
+      <main
+        className="flex-1 min-w-0 p-6 md:p-8 transition-all duration-300"
+        style={{ marginLeft: 'calc(var(--sidebar-width, 16rem) + var(--sidebar-gap, 1rem))' }}
+      >
+        {children}
       </main>
     </div>
   );
