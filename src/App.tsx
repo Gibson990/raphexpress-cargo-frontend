@@ -12,6 +12,7 @@ import Availability from './pages/Availability';
 import JoinUs from './pages/JoinUs';
 import ApiDocs from './pages/ApiDocs';
 import ShippingCalculator from './pages/ShippingCalculator';
+import ServiceComparison from './pages/ServiceComparison';
 import CreateShipment from './pages/CreateShipment';
 import MyShipments from './pages/MyShipments';
 import ReturnOrder from './pages/ReturnOrder';
@@ -77,6 +78,7 @@ function App() {
           <Route path={ROUTES.JOIN_US} element={<JoinUs />} />
           <Route path={ROUTES.API_DOCS} element={<ApiDocs />} />
           <Route path={ROUTES.CALCULATOR} element={<ShippingCalculator />} />
+          <Route path="/services/compare" element={<ServiceComparison />} />
           <Route path={ROUTES.CREATE_SHIPMENT} element={<CreateShipment />} />
           <Route path={ROUTES.MY_SHIPMENTS} element={<MyShipments />} />
           <Route path={ROUTES.RETURN_ORDER} element={<ReturnOrder />} />
